@@ -106,26 +106,6 @@ flutter run
 
 **Credenciais padrão:** `admin` / `admin123`
 
----
-
-## 💼 Como Adquirir
-
-Este é um produto digital entregue via **GitHub privado**.
-
-### Opção 1: PIX (Brasil)
-Envie um email para [seu-email] com:
-- Seu GitHub username
-- Comprovante de pagamento PIX
-
-Após confirmação, você receberá acesso ao repositório privado.
-
-### Opção 2: Mercado Pago
-[Link de pagamento do Mercado Pago]
-
-Após o pagamento, envie seu GitHub username para liberação.
-
-### Opção 3: Stripe (Internacional)
-[Link de pagamento do Stripe]
 
 ---
 
