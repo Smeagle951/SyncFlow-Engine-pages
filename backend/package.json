@@ -1,0 +1,30 @@
+{
+    "name": "offlinesync-pro-backend",
+    "version": "1.0.0",
+    "description": "Backend Node.js para OfflineSync Pro",
+    "main": "src/index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "init-db": "node src/database/init.js"
+    },
+    "keywords": [
+        "offline",
+        "sync",
+        "nodejs",
+        "express"
+    ],
+    "author": "",
+    "license": "COMMERCIAL",
+    "dependencies": {
+        "express": "^4.18.2",
+        "sqlite3": "^5.1.6",
+        "jsonwebtoken": "^9.0.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "bcryptjs": "^2.4.3"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}
