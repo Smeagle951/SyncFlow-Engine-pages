@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('../database/db');
+const auditLogger = require('../utils/auditLogger');
 
 const router = express.Router();
 
@@ -30,19 +31,25 @@ router.post('/login', (req, res) => {
                 return res.status(401).json({ error: 'Credenciais inválidas' });
             }
 
-            const token = jwt.sign(
-                { userId: user.id, username: user.username },
-                process.env.JWT_SECRET || 'default-secret',
-                { expiresIn: '7d' }
-            );
+      const token = jwt.sign(
+        { userId: user.id, username: user.username },
+        process.env.JWT_SECRET || 'default-secret',
+        { expiresIn: '7d' }
+      );
 
-            res.json({
-                token,
-                user: {
-                    id: user.id,
-                    username: user.username
-                }
-            });
+      // Log de auditoria
+      auditLogger.logAuth('LOGIN_SUCCESS', {
+        userId: user.id,
+        username: user.username
+      });
+
+      res.json({
+        token,
+        user: {
+          id: user.id,
+          username: user.username
+        }
+      });
         }
     );
 });

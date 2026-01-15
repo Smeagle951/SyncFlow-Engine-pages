@@ -1,6 +1,7 @@
 const express = require('express');
 const db = require('../database/db');
 const authenticate = require('../middleware/auth');
+const auditLogger = require('../utils/auditLogger');
 
 const router = express.Router();
 
@@ -11,6 +12,13 @@ router.use(authenticate);
 router.post('/push', (req, res) => {
   const { records } = req.body;
   const userId = req.user.userId;
+
+  // Log de auditoria
+  auditLogger.logSync('PUSH_START', {
+    userId,
+    recordCount: records?.length || 0,
+    timestamp: new Date().toISOString()
+  });
 
   if (!Array.isArray(records)) {
     return res.status(400).json({ error: 'records deve ser um array' });
@@ -63,14 +71,29 @@ router.post('/push', (req, res) => {
         if (existing) {
           // Verificar conflito de versão
           if (existing.version >= version) {
-            conflicts.push({
+            const conflictData = {
               uuid,
               serverVersion: existing.version,
               clientVersion: version,
               serverData: JSON.parse(existing.data)
+            };
+            conflicts.push(conflictData);
+            
+            // Log de auditoria para conflito
+            auditLogger.logConflict(uuid, {
+              userId,
+              serverVersion: existing.version,
+              clientVersion: version
             });
+            
             processed++;
             if (processed === records.length) {
+              auditLogger.logSync('PUSH_COMPLETE', {
+                userId,
+                synced: synced.length,
+                conflicts: conflicts.length,
+                errors: errors.length
+              });
               res.json({
                 synced,
                 conflicts,
@@ -92,11 +115,19 @@ router.post('/push', (req, res) => {
             (err) => {
               if (err) {
                 errors.push({ uuid, error: 'Erro ao atualizar' });
+                auditLogger.logError('UPDATE_RECORD', err);
               } else {
                 synced.push({ uuid, version });
+                auditLogger.logSync('RECORD_UPDATED', { userId, uuid, version });
               }
               processed++;
               if (processed === records.length) {
+                auditLogger.logSync('PUSH_COMPLETE', {
+                  userId,
+                  synced: synced.length,
+                  conflicts: conflicts.length,
+                  errors: errors.length
+                });
                 res.json({
                   synced,
                   conflicts,
@@ -112,11 +143,19 @@ router.post('/push', (req, res) => {
             (err) => {
               if (err) {
                 errors.push({ uuid, error: 'Erro ao inserir' });
+                auditLogger.logError('INSERT_RECORD', err);
               } else {
                 synced.push({ uuid, version });
+                auditLogger.logSync('RECORD_CREATED', { userId, uuid, version });
               }
               processed++;
               if (processed === records.length) {
+                auditLogger.logSync('PUSH_COMPLETE', {
+                  userId,
+                  synced: synced.length,
+                  conflicts: conflicts.length,
+                  errors: errors.length
+                });
                 res.json({
                   synced,
                   conflicts,
@@ -136,6 +175,8 @@ router.get('/pull', (req, res) => {
   const userId = req.user.userId;
   const since = req.query.since || '1970-01-01T00:00:00.000Z';
 
+  auditLogger.logSync('PULL_START', { userId, since });
+
   db.all(
     `SELECT uuid, data, version, updated_at, deleted_at 
      FROM records 
@@ -154,6 +195,12 @@ router.get('/pull', (req, res) => {
         updated_at: row.updated_at,
         deleted_at: row.deleted_at
       }));
+
+      auditLogger.logSync('PULL_COMPLETE', {
+        userId,
+        recordCount: records.length,
+        since
+      });
 
       res.json({
         records,
