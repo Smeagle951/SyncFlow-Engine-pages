@@ -323,8 +323,15 @@
 
             localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
 
+            // Opção: Enviar para Google Forms ANTES de redirecionar (veja AUTOMATIZACAO.md)
+            // const formUrl = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+            // const formData = new FormData();
+            // formData.append('entry.XXXXXXX', nome); // Substitua X pelos IDs do formulário
+            // formData.append('entry.YYYYYYY', email);
+            // fetch(formUrl, { method: 'POST', body: formData, mode: 'no-cors' });
+
             // Redirecionar para o pagamento da Kiwify
-            // Você pode adicionar os dados como parâmetros na URL se a Kiwify suportar
+            // Após o pagamento, o cliente pode ser redirecionado para thankyou.html
             window.location.href = 'https://pay.kiwify.com.br/hpMHcPO';
         });
 

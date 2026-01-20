@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Obrigado pela compra - OfflineSync Pro">
+    <title>Compra Confirmada - OfflineSync Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            padding: 3rem;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .info-box {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .info-box h2 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-box li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .info-box li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .access-box {
+            background: #dbeafe;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .access-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .access-code {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            margin-top: 0.5rem;
+            border: 2px dashed var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .note {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #92400e;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>Compra Confirmada!</h1>
+        <p class="subtitle">Obrigado pela sua compra do OfflineSync Pro</p>
+
+        <div class="info-box">
+            <h2>📦 O que você recebeu:</h2>
+            <ul>
+                <li>Acesso ao repositório privado no GitHub</li>
+                <li>Código completo (Flutter + Backend Node.js)</li>
+                <li>Documentação profissional completa</li>
+                <li>Guia de produção detalhado</li>
+                <li>Licença de uso comercial</li>
+            </ul>
+        </div>
+
+        <div class="access-box" id="accessBox">
+            <h3>🔑 Seu Código de Acesso:</h3>
+            <div class="loading show" id="loading">
+                <p>Preparando seu acesso...</p>
+            </div>
+            <div id="accessInfo" style="display: none;">
+                <p style="margin-bottom: 0.5rem;">Seu código de acesso será enviado para:</p>
+                <p style="font-weight: bold; color: var(--primary-color);" id="userEmail"></p>
+                <div class="access-code" id="accessCode">
+                    [Código sendo gerado...]
+                </div>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light;">
+                    Verifique sua caixa de entrada (e spam) nos próximos minutos.
+                </p>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>⚠️ Importante:</strong> Se você não receber o email em 5 minutos, verifique sua caixa de spam ou entre em contato conosco pelo WhatsApp.
+        </div>
+
+        <a href="https://wa.me/qr/UEWGZ6DMMBBXN1" class="btn" target="_blank">
+            Falar no WhatsApp
+        </a>
+
+        <p style="margin-top: 2rem; color: var(--text-light); font-size: 0.9rem;">
+            Ou volte para a <a href="index.html" style="color: var(--primary-color);">página inicial</a>
+        </p>
+    </div>
+
+    <script>
+        // Função para obter parâmetros da URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            const results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // Recuperar dados do checkout
+        function loadCheckoutData() {
+            const savedData = localStorage.getItem('checkoutData');
+            if (savedData) {
+                try {
+                    return JSON.parse(savedData);
+                } catch (e) {
+                    console.error('Erro ao carregar dados:', e);
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        // Simular geração de código (você pode substituir por chamada de API)
+        function generateAccessCode() {
+            // Gerar código único baseado em timestamp e hash
+            const timestamp = Date.now();
+            const random = Math.random().toString(36).substring(2, 9);
+            return `OFS-${timestamp.toString(36).substring(5).toUpperCase()}-${random.toUpperCase()}`;
+        }
+
+        // Salvar dados para processamento posterior
+        function savePurchaseData(email, nome, codigo) {
+            // Aqui você pode enviar para um servidor, Google Sheets, etc.
+            const purchaseData = {
+                email: email,
+                nome: nome,
+                codigo: codigo,
+                timestamp: new Date().toISOString(),
+                status: 'pendente_envio'
+            };
+
+            // Salvar no localStorage como backup
+            localStorage.setItem('lastPurchase', JSON.stringify(purchaseData));
+
+            // Opção 1: Enviar para Google Forms (veja instruções abaixo)
+            // Opção 2: Enviar para API própria
+            // Opção 3: Enviar por email via EmailJS ou similar
+
+            console.log('Dados da compra:', purchaseData);
+            return purchaseData;
+        }
+
+        // Inicializar página
+        window.addEventListener('load', function() {
+            const checkoutData = loadCheckoutData();
+            
+            if (checkoutData && checkoutData.email) {
+                // Mostrar email do usuário
+                document.getElementById('userEmail').textContent = checkoutData.email;
+                
+                // Simular processamento (2 segundos)
+                setTimeout(() => {
+                    const codigo = generateAccessCode();
+                    
+                    // Salvar dados da compra
+                    savePurchaseData(
+                        checkoutData.email,
+                        checkoutData.nome || 'Cliente',
+                        codigo
+                    );
+
+                    // Mostrar código
+                    document.getElementById('loading').classList.remove('show');
+                    document.getElementById('accessInfo').style.display = 'block';
+                    document.getElementById('accessCode').textContent = codigo;
+
+                    // Aqui você pode enviar email automaticamente se tiver um serviço configurado
+                    // sendEmailToCustomer(checkoutData.email, codigo);
+                }, 2000);
+            } else {
+                // Se não tiver dados do checkout, tentar obter da URL
+                const email = getUrlParameter('email') || 'seu@email.com';
+                document.getElementById('userEmail').textContent = email;
+                document.getElementById('loading').classList.remove('show');
+                document.getElementById('accessInfo').style.display = 'block';
+            }
+        });
+
+        // Limpar dados após mostrar (opcional)
+        // localStorage.removeItem('checkoutData');
+    </script>
+</body>
+</html>
