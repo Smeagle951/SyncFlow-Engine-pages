@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +9,8 @@
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        // Inicializar EmailJS com sua Public Key (substitua quando configurar)
-        // emailjs.init('YOUR_PUBLIC_KEY');
+        // Inicializar EmailJS com sua Public Key
+        emailjs.init('APZDho1OVaUD69_Gt');
     </script>
     <style>
         * {
@@ -219,6 +220,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="logo">
@@ -274,7 +276,7 @@
 
     <script>
         // Máscara para telefone
-        document.getElementById('telefone').addEventListener('input', function(e) {
+        document.getElementById('telefone').addEventListener('input', function (e) {
             let value = e.target.value.replace(/\D/g, '');
             if (value.length <= 11) {
                 value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
@@ -287,7 +289,7 @@
         const form = document.getElementById('checkoutForm');
         const submitBtn = document.getElementById('submitBtn');
 
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', function (e) {
             e.preventDefault();
 
             // Remover erros anteriores
@@ -328,9 +330,9 @@
             };
 
             // Gerar código único para acesso
-            const codigo = 'OFS-' + Date.now().toString(36).toUpperCase().substring(5, 10) + '-' + 
-                          Math.random().toString(36).toUpperCase().substring(2, 7);
-            
+            const codigo = 'OFS-' + Date.now().toString(36).toUpperCase().substring(5, 10) + '-' +
+                Math.random().toString(36).toUpperCase().substring(2, 7);
+
             // Adicionar código aos dados
             checkoutData.codigo = codigo;
             localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
@@ -359,16 +361,16 @@
             }
 
             try {
-                // Configurações do EmailJS (substitua pelos seus valores)
-                const serviceID = 'YOUR_SERVICE_ID'; // Ex: 'service_gmail'
-                const templateID = 'YOUR_TEMPLATE_ID'; // Ex: 'template_access_code'
-                
+                // Configurações do EmailJS
+                const serviceID = 'YOUR_SERVICE_ID'; // Substitua pelo seu Service ID (ex: 'service_gmail')
+                const templateID = 'template_tkhy118'; // Template ID configurado
+
                 // URLs do sistema
                 // Substitua pela sua URL do GitHub Pages (ex: https://smeagle951.github.io/SyncFlow-Engine-pages)
                 const landingPageUrl = 'https://smeagle951.github.io/SyncFlow-Engine-pages';
                 const repoUrl = 'https://github.com/Smeagle951/SyncFlow-Engine';
                 const accessUrl = landingPageUrl + '/access.html';
-                
+
                 // Dados do email
                 const templateParams = {
                     to_name: nome,
@@ -384,10 +386,10 @@
                 // Enviar email
                 await emailjs.send(serviceID, templateID, templateParams);
                 console.log('Email enviado com sucesso!');
-                
+
                 // Salvar que email foi enviado
                 localStorage.setItem('emailSent', 'true');
-                
+
             } catch (error) {
                 console.error('Erro ao enviar email:', error);
                 // Não bloquear o fluxo se email falhar
@@ -395,7 +397,7 @@
         }
 
         // Carregar dados salvos se existirem (caso o usuário volte)
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             const savedData = localStorage.getItem('checkoutData');
             if (savedData) {
                 try {
@@ -411,4 +413,5 @@
         });
     </script>
 </body>
+
 </html>
