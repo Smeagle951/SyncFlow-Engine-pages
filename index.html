@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Motor profissional de sincronização offline-first para Flutter + Node.js. Solução completa e pronta para produção.">
+    <title>OfflineSync Pro - Sincronização Offline-First para Flutter</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Problem Section */
+        .problem {
+            background: #fee2e2;
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+
+        .problem h2 {
+            color: #991b1b;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .problem p {
+            font-size: 1.1rem;
+            color: #7f1d1d;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--bg-white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* Solution Section */
+        .solution {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 0;
+        }
+
+        .solution h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .solution p {
+            text-align: center;
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .checklist {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            text-align: left;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .check-icon {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .step p {
+            color: var(--text-light);
+        }
+
+        /* Technologies */
+        .technologies {
+            padding: 5rem 0;
+            background: var(--bg-white);
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .tech-item {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            border: 2px solid var(--border-color);
+            transition: all 0.3s;
+        }
+
+        .tech-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Target Audience */
+        .audience {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .audience-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .audience-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* SyncFlow Engine Section */
+        .syncflow-engine {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d4a6f 100%);
+            color: white;
+        }
+
+        .syncflow-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .syncflow-image {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+
+        .syncflow-image:hover {
+            transform: scale(1.02);
+        }
+
+        .syncflow-info h3 {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .syncflow-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .syncflow-info li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .syncflow-info li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .syncflow-images-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .syncflow-images-grid img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 968px) {
+            .syncflow-content {
+                grid-template-columns: 1fr;
+            }
+
+            .syncflow-images-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* What's Included */
+        .whats-included {
+            padding: 5rem 0;
+            background: var(--bg-white);
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .included-section {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+        }
+
+        .included-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .included-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .included-section li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-dark);
+        }
+
+        .included-section li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 5rem 0;
+            background: var(--bg-light);
+        }
+
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-light);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            color: var(--text-light);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero .description {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">OfflineSync Pro</div>
+            <ul class="nav-links">
+                <li><a href="#features">Recursos</a></li>
+                <li><a href="#syncflow">SyncFlow Engine</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#tecnologias">Tecnologias</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>OfflineSync Pro</h1>
+            <p class="subtitle">Motor profissional de sincronização offline-first</p>
+            <p class="description">
+                Solução completa e testada para Flutter + Node.js. Implemente sincronização confiável em dias, não em
+                semanas.
+            </p>
+            <div class="cta-buttons">
+                <a href="#cta" class="btn btn-primary">Obter Agora</a>
+                <a href="#features" class="btn btn-secondary">Saiba Mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <h2>🚨 O Problema</h2>
+            <p>
+                A maioria dos aplicativos Flutter quebra quando fica offline. Dados são perdidos, conflitos surgem
+                silenciosamente
+                e implementar sincronização confiável do zero leva semanas ou meses. Você precisa de uma solução pronta,
+                testada
+                e pronta para produção.
+            </p>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <h2>✅ A Solução</h2>
+            <p>
+                <strong>OfflineSync Pro</strong> é um sistema completo de sincronização offline-first, testado e pronto
+                para produção.
+            </p>
+            <div class="checklist">
+                <div class="checklist-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>Persistência offline real</strong> - SQLite local, funciona sem internet</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>Sincronização confiável</strong> - Fila de operações com retry automático</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>Controle de versão</strong> - Detecção automática de conflitos</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>Resolução de conflitos</strong> - Estratégia Last Write Wins (extensível)</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>Backend Node.js</strong> - Simples, eficiente e escalável</span>
+                </div>
+                <div class="checklist-item">
+                    <span class="check-icon">✅</span>
+                    <span><strong>Código limpo</strong> - Clean Architecture, fácil de adaptar</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">🎯 Recursos Implementados</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Fila de Eventos Offline</h3>
+                    <p>Operações CREATE, UPDATE, DELETE são enfileiradas localmente. Funciona completamente offline com
+                        sincronização automática quando há conexão.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚔️</div>
+                    <h3>Conflitos Resolvíveis</h3>
+                    <p>Detecção automática de conflitos por versão. Estratégia Last Write Wins implementada e extensível
+                        para outras estratégias.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Logs Auditáveis</h3>
+                    <p>Sistema completo de auditoria com logs de todas as operações de sincronização, conflitos,
+                        autenticação e erros.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Sincronização Bidirecional</h3>
+                    <p>Push: Cliente → Servidor | Pull: Servidor → Cliente. Delta sync (apenas mudanças) e
+                        timestamp-based sync.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Dados Consistentes</h3>
+                    <p>Versionamento de registros, soft delete, isolamento por usuário e validação de integridade.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏗️</div>
+                    <h3>Clean Architecture</h3>
+                    <p>Código organizado seguindo Clean Architecture, fácil de entender, manter e estender para suas
+                        necessidades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SyncFlow Engine Section -->
+    <section class="syncflow-engine" id="syncflow">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">⚙️ SyncFlow Engine</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 1rem; opacity: 0.95;">
+                Motor de Sincronização Offline ↔ Online Profissional
+            </p>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 3rem; opacity: 0.9;">
+                Sincronização Determinística Offline ↔ Online com Flutter + Node.js
+            </p>
+
+            <!-- Imagens do SyncFlow -->
+            <div class="syncflow-images-grid">
+                <div>
+                    <img src="images/syncflow-engine-1.png" alt="SyncFlow Engine - Visão Geral" class="syncflow-image" 
+                         onerror="this.style.display='none'">
+                    <p style="text-align: center; margin-top: 1rem; opacity: 0.8; font-size: 0.9rem;">
+                        SyncFlow Engine - Arquitetura e Funcionalidades
+                    </p>
+                </div>
+                <div>
+                    <img src="images/syncflow-engine-2.png" alt="SyncFlow Engine - Fluxo de Sincronização" class="syncflow-image"
+                         onerror="this.style.display='none'">
+                    <p style="text-align: center; margin-top: 1rem; opacity: 0.8; font-size: 0.9rem;">
+                        Fluxo Determinístico de Sincronização
+                    </p>
+                </div>
+            </div>
+
+            <!-- Informações do Motor -->
+            <div class="syncflow-content" style="margin-top: 4rem;">
+                <div class="syncflow-info">
+                    <h3>🎯 Características Principais</h3>
+                    <ul>
+                        <li><strong>Fila de Eventos Offline</strong> - Operações CREATE, UPDATE, DELETE são enfileiradas localmente</li>
+                        <li><strong>Resolução Inteligente de Conflitos</strong> - Detecção automática e resolução com Last Write Wins</li>
+                        <li><strong>Controle de Versão Auditável</strong> - Versionamento completo de registros</li>
+                        <li><strong>API Backend Completa</strong> - Endpoints otimizados para sincronização bidirecional</li>
+                        <li><strong>Log de Auditoria</strong> - Registro completo de todas as operações</li>
+                        <li><strong>Sem Duplicidade</strong> - Prevenção automática de registros duplicados</li>
+                    </ul>
+                </div>
+                <div class="syncflow-info">
+                    <h3>🔄 Fluxo de Sincronização</h3>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px; margin-top: 1rem;">
+                        <div style="margin-bottom: 1.5rem;">
+                            <strong style="color: var(--secondary-color);">1. App Flutter</strong>
+                            <p style="margin-top: 0.5rem; opacity: 0.9;">Fila de Eventos local (CREATE | UPDATE | DELETE) - Offline Total</p>
+                        </div>
+                        <div style="margin-bottom: 1.5rem; padding-left: 2rem; border-left: 3px solid var(--secondary-color);">
+                            <strong style="color: var(--secondary-color);">2. SyncFlow API</strong>
+                            <p style="margin-top: 0.5rem; opacity: 0.9;">Processamento e validação - Sem Duplicidade | Eventos Auditáveis</p>
+                        </div>
+                        <div>
+                            <strong style="color: var(--secondary-color);">3. Banco de Dados</strong>
+                            <p style="margin-top: 0.5rem; opacity: 0.9;">Versionamento | Resolução de Conflitos | Log de Auditoria</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefícios -->
+            <div style="margin-top: 4rem; text-align: center;">
+                <h3 style="color: var(--secondary-color); margin-bottom: 2rem; font-size: 1.8rem;">
+                    ✅ Benefícios Garantidos
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+                        <h4 style="color: var(--secondary-color); margin-bottom: 0.5rem;">Offline Total</h4>
+                        <p style="opacity: 0.9;">Funciona completamente offline. Todas as operações são salvas localmente.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🔒</div>
+                        <h4 style="color: var(--secondary-color); margin-bottom: 0.5rem;">Sem Duplicidade</h4>
+                        <p style="opacity: 0.9;">Prevenção automática de registros duplicados durante a sincronização.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 12px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                        <h4 style="color: var(--secondary-color); margin-bottom: 0.5rem;">Eventos Auditáveis</h4>
+                        <p style="opacity: 0.9;">Log completo de todas as operações para auditoria e compliance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="whats-included">
+        <div class="container">
+            <h2 class="section-title">📦 O Que Está Incluído</h2>
+            <div class="included-grid">
+                <div class="included-section">
+                    <h3>Flutter App</h3>
+                    <ul>
+                        <li>SQLite local com sqflite</li>
+                        <li>Sync Engine completo e isolado</li>
+                        <li>CRUD de exemplo funcional</li>
+                        <li>Interface pronta para uso</li>
+                        <li>Arquitetura Clean Architecture</li>
+                    </ul>
+                </div>
+                <div class="included-section">
+                    <h3>Backend Node.js</h3>
+                    <ul>
+                        <li>Express + SQLite (migrável para PostgreSQL)</li>
+                        <li>Autenticação JWT</li>
+                        <li>Endpoints de sincronização otimizados</li>
+                        <li>Detecção e resolução de conflitos</li>
+                        <li>Validação de versões</li>
+                    </ul>
+                </div>
+                <div class="included-section">
+                    <h3>Documentação Profissional</h3>
+                    <ul>
+                        <li>Guia de setup completo</li>
+                        <li>Arquitetura técnica detalhada</li>
+                        <li>Guia de produção (como adaptar)</li>
+                        <li>FAQ com casos de uso</li>
+                        <li>Exemplos práticos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="como-funciona">
+        <div class="container">
+            <h2 class="section-title">🧠 Como Funciona</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Salva Localmente</h3>
+                    <p>Dados são salvos localmente primeiro no SQLite, marcados como <code>pending</code> para
+                        sincronização</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Sync Engine</h3>
+                    <p>Sync Engine envia para o backend quando há conexão, verificando automaticamente a rede</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Valida Versões</h3>
+                    <p>Backend valida versões e detecta conflitos automaticamente usando versionamento</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Resolve Conflitos</h3>
+                    <p>Conflitos são resolvidos automaticamente (Last Write Wins) e o app mantém consistência</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 3rem; font-size: 1.2rem; color: var(--text-light);">
+                <strong>Tudo funciona offline. Sincronização é automática quando há internet.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Technologies -->
+    <section class="technologies" id="tecnologias">
+        <div class="container">
+            <h2 class="section-title">⚙️ Tecnologias</h2>
+            <div class="tech-grid">
+                <div class="tech-item">Flutter 3.0+</div>
+                <div class="tech-item">SQLite (sqflite)</div>
+                <div class="tech-item">Node.js 18+</div>
+                <div class="tech-item">Express</div>
+                <div class="tech-item">JWT</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="audience">
+        <div class="container">
+            <h2 class="section-title">🎯 Para Quem É</h2>
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <h3>Apps de Campo</h3>
+                    <p>Agro, inspeção, logística - aplicativos que precisam funcionar em áreas remotas sem internet
+                        constante.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Aplicações B2B</h3>
+                    <p>Empresas que precisam de sincronização offline confiável para seus aplicativos corporativos.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Startups</h3>
+                    <p>MVP rápido com sincronização profissional sem perder semanas desenvolvendo do zero.</p>
+                </div>
+                <div class="audience-card">
+                    <h3>Desenvolvedores</h3>
+                    <p>Quem não quer perder semanas implementando sincronização - código pronto e testado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">❓ Perguntas Frequentes</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>O que é OfflineSync Pro?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        É um módulo completo de sincronização offline-first para Flutter + Node.js, pronto para
+                        produção.
+                        Inclui código completo, documentação e guia de produção.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Como funciona a resolução de conflitos?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Por padrão, usa <strong>Last Write Wins</strong> (última escrita vence). Conflitos são
+                        detectados
+                        por versão e marcados para revisão. O código está aberto para você implementar outras
+                        estratégias se necessário.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quantas entidades posso sincronizar?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        O MVP inclui uma entidade de exemplo (<code>Record</code>). Você pode estender para quantas
+                        precisar
+                        seguindo o mesmo padrão documentado. A arquitetura suporta múltiplas entidades facilmente.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Funciona 100% offline?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Sim! Todas as operações CRUD funcionam offline. Os dados são salvos localmente no SQLite e
+                        sincronizados
+                        automaticamente quando há conexão com a internet.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Posso usar em projetos comerciais?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Sim, a licença permite uso comercial em seus projetos e de clientes. Redistribuição e revenda do
+                        código
+                        não são permitidas. Consulte LICENSE.txt para detalhes completos.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Quanto tempo leva para integrar?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Depende do seu projeto, mas seguindo o padrão fornecido, você pode adaptar em poucos dias. A
+                        documentação
+                        inclui guia passo-a-passo de integração e adaptação para suas entidades.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <h2>Pronto para Produção</h2>
+            <p>Implemente sincronização offline-first profissional em seu projeto Flutter hoje mesmo.</p>
+            <div class="cta-buttons">
+                <!-- TODO: Substitua #comprar pelo link real da sua plataforma de pagamento (Hotmart, Kiwify, etc.) -->
+                <a href="#comprar" class="btn btn-primary" target="_blank">Compre Agora</a>
+                <a href="https://wa.me/qr/UEWGZ6DMMBBXN1" class="btn btn-secondary" target="_blank">Entrar em Contato</a>
+            </div>
+            <p style="margin-top: 2rem; opacity: 0.9; font-size: 0.9rem;">
+                Após o pagamento confirmado, você recebe acesso ao repositório privado com código completo,
+                documentação e guia de produção.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#features">Recursos</a>
+                <a href="#syncflow">SyncFlow Engine</a>
+                <a href="#como-funciona">Como Funciona</a>
+                <a href="#tecnologias">Tecnologias</a>
+                <a href="#faq">FAQ</a>
+                <a href="#cta">Comprar</a>
+            </div>
+            <p>&copy; 2025 OfflineSync Pro. Todos os direitos reservados.</p>
+            <p style="margin-top: 1rem; opacity: 0.8; font-size: 0.9rem;">
+                Pronto para usar. Pronto para produção. Pronto para escalar.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .step, .audience-card, .included-section').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>

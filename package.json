@@ -1,0 +1,18 @@
+{
+  "name": "offlinesync-pro",
+  "version": "1.0.0",
+  "description": "OfflineSync Pro - Motor profissional de sincronização offline-first",
+  "scripts": {
+    "serve": "node server.js",
+    "dev": "node server.js",
+    "landing": "node server.js"
+  },
+  "keywords": [
+    "offline",
+    "sync",
+    "flutter",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "COMMERCIAL"
+}
