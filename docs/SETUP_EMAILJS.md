@@ -132,17 +132,39 @@ Este guia mostra como configurar o EmailJS para enviar emails automaticamente co
 </div>
 ```
 
-4. Configure as variáveis:
-   - `{{to_name}}` → Nome do cliente
-   - `{{to_email}}` → Email do cliente
-   - `{{codigo}}` → Código de acesso
-   - `{{repo_url}}` → URL do repositório (https://github.com/Smeagle951/SyncFlow-Engine)
-   - `{{access_url}}` → URL da página de acesso (https://smeagle951.github.io/SyncFlow-Engine-pages/access.html)
-   - `{{landing_url}}` → URL da landing page (https://smeagle951.github.io/SyncFlow-Engine-pages)
-   - `{{telefone}}` → Telefone para contato: (45) 9 9126-1695
-   - `{{telefone_link}}` → Link do WhatsApp: 554591261695
+4. **Configure as variáveis no template:**
 
-5. Salve o template e **anote o Template ID** (ex: `template_access_code`)
+   No EmailJS, quando você colar o template HTML, você verá campos com `{{nome_variavel}}`.
+   
+   **Como configurar cada variável:**
+   
+   - Clique no campo no template que tem `{{to_name}}`
+   - No painel direito, em "Variable" ou "Add Variable"
+   - Selecione ou digite: `to_name`
+   - Repita para cada variável abaixo:
+   
+   **Lista completa de variáveis:**
+   ```
+   {{to_name}}          → Campo: "Nome do cliente"
+   {{to_email}}         → Campo: "Email do cliente" (usado como destinatário)
+   {{codigo}}           → Campo: "Código de acesso gerado"
+   {{repo_url}}         → Campo: "Link do repositório GitHub"
+   {{access_url}}       → Campo: "Link da página de acesso"
+   {{landing_url}}      → Campo: "Link da landing page"
+   {{telefone}}         → Campo: "Telefone de contato"
+   {{telefone_link}}    → Campo: "Link WhatsApp (apenas números)"
+   ```
+   
+   **OU** você pode deixar o template HTML como está e o EmailJS usará automaticamente os valores passados no JavaScript.
+
+5. **Configurar o campo "To Email" (destinatário):**
+   - No topo do template, procure por "To Email" ou "Recipient"
+   - Selecione ou digite: `{{to_email}}`
+   - Isso fará o email ser enviado para o email do cliente
+
+6. **Salve o template e anote o Template ID:**
+   - Clique em "Save" (Salvar)
+   - Anote o **Template ID** (ex: `template_abc123xyz`)
 
 ### 4. Obter Public Key
 
