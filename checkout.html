@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Checkout - OfflineSync Pro">
+    <title>Checkout - OfflineSync Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary-color: #10b981;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --bg-white: #ffffff;
+            --border-color: #e5e7eb;
+            --error-color: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--bg-white);
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            padding: 3rem;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .product-info {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .product-info h2 {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .price {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.25rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group.error input {
+            border-color: var(--error-color);
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .required {
+            color: var(--error-color);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .back-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .info-box {
+            background: #dbeafe;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .info-box p {
+            color: #1e40af;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>OfflineSync Pro</h1>
+            <p>Finalize sua compra</p>
+        </div>
+
+        <div class="product-info">
+            <h2>OfflineSync Pro</h2>
+            <p>Motor profissional de sincronização offline-first para Flutter + Node.js</p>
+            <div class="price">R$ XXX,XX</div>
+        </div>
+
+        <div class="info-box">
+            <p>📧 Após o pagamento confirmado, você receberá o código de acesso ao repositório privado por email.</p>
+        </div>
+
+        <form id="checkoutForm">
+            <div class="form-group">
+                <label for="nome">Nome Completo <span class="required">*</span></label>
+                <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
+                <small>Seu nome completo será usado para identificação</small>
+                <div class="error-message">Por favor, preencha seu nome completo</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="seu@email.com">
+                <small>Enviaremos o código de acesso para este email</small>
+                <div class="error-message">Por favor, digite um email válido</div>
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone (Opcional)</label>
+                <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                <small>Para contato caso necessário</small>
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Mensagem (Opcional)</label>
+                <textarea id="mensagem" name="mensagem" rows="3" placeholder="Alguma observação ou dúvida?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="submitBtn">
+                Finalizar Compra
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="index.html">← Voltar para a página principal</a>
+        </div>
+    </div>
+
+    <script>
+        // Máscara para telefone
+        document.getElementById('telefone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+                value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+                e.target.value = value;
+            }
+        });
+
+        // Validação do formulário
+        const form = document.getElementById('checkoutForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Remover erros anteriores
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+
+            // Validar campos
+            let isValid = true;
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            if (!nome) {
+                document.getElementById('nome').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            if (!email || !isValidEmail(email)) {
+                document.getElementById('email').closest('.form-group').classList.add('error');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return;
+            }
+
+            // Desabilitar botão
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Redirecionando...';
+
+            // Salvar dados no localStorage para uso posterior
+            const checkoutData = {
+                nome: nome,
+                email: email,
+                telefone: document.getElementById('telefone').value.trim(),
+                mensagem: document.getElementById('mensagem').value.trim(),
+                timestamp: new Date().toISOString()
+            };
+
+            localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+
+            // Redirecionar para o pagamento da Kiwify
+            // Você pode adicionar os dados como parâmetros na URL se a Kiwify suportar
+            window.location.href = 'https://pay.kiwify.com.br/hpMHcPO';
+        });
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Carregar dados salvos se existirem (caso o usuário volte)
+        window.addEventListener('load', function() {
+            const savedData = localStorage.getItem('checkoutData');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    if (data.nome) document.getElementById('nome').value = data.nome;
+                    if (data.email) document.getElementById('email').value = data.email;
+                    if (data.telefone) document.getElementById('telefone').value = data.telefone;
+                    if (data.mensagem) document.getElementById('mensagem').value = data.mensagem;
+                } catch (e) {
+                    console.error('Erro ao carregar dados salvos:', e);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -13,6 +13,9 @@ const server = http.createServer((req, res) => {
     if (req.url === '/' || req.url === '/index.html') {
         filePath = FILE_PATH;
         contentType = 'text/html; charset=utf-8';
+    } else if (req.url === '/checkout.html') {
+        filePath = path.join(__dirname, 'checkout.html');
+        contentType = 'text/html; charset=utf-8';
     } else if (req.url.startsWith('/images/')) {
         // Servir imagens da pasta images
         filePath = path.join(__dirname, req.url);
