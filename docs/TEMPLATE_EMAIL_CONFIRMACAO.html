@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div style="font-family: system-ui, sans-serif, Arial; font-size: 14px; color: #212121">
+  <div style="max-width: 600px; margin: auto">
+    <!-- Header -->
+    <div style="text-align: center; background-color: #2563eb; padding: 32px 16px; border-radius: 32px 32px 0 0;">
+      <h1 style="color: white; margin: 0; font-size: 28px; font-weight: bold;">🚀 OfflineSync Pro</h1>
+      <p style="color: rgba(255, 255, 255, 0.9); margin: 8px 0 0 0; font-size: 14px;">Motor de Sincronização Offline-First</p>
+    </div>
+
+    <!-- Content -->
+    <div style="padding: 32px 16px; background-color: white;">
+      <h1 style="font-size: 26px; margin-bottom: 20px; color: #2563eb;">Seu acesso foi liberado! 🎉</h1>
+      
+      <p style="margin-bottom: 12px;">Olá <strong>{{to_name}}</strong>,</p>
+      
+      <p style="margin-bottom: 20px;">Obrigado pela sua compra do <strong>OfflineSync Pro</strong>!</p>
+      
+      <p style="margin-bottom: 24px;">Seu pagamento foi confirmado e seu acesso ao repositório privado está liberado.</p>
+
+      <!-- Código de Acesso - Destaque -->
+      <div style="background-color: #f0fdf4; padding: 24px; border-radius: 12px; margin: 24px 0; border: 2px solid #10b981;">
+        <h2 style="margin: 0 0 16px 0; color: #10b981; font-size: 18px; text-align: center;">🔑 Seu Código de Acesso:</h2>
+        <div style="background-color: #1f2937; padding: 20px; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 24px; font-weight: bold; color: #10b981; text-align: center; letter-spacing: 3px; border: 2px dashed #10b981;">
+          {{codigo}}
+        </div>
+        <p style="text-align: center; margin: 16px 0 0 0; color: #6b7280; font-size: 12px;">Guarde este código com segurança</p>
+      </div>
+
+      <!-- O que você recebeu -->
+      <div style="margin: 32px 0;">
+        <h2 style="color: #2563eb; font-size: 20px; margin-bottom: 16px;">📦 O que você recebeu:</h2>
+        <ul style="margin: 0; padding-left: 20px; line-height: 2.2;">
+          <li style="margin-bottom: 8px;"><strong>Acesso ao repositório privado</strong> no GitHub</li>
+          <li style="margin-bottom: 8px;"><strong>Código completo</strong> (Flutter + Backend Node.js)</li>
+          <li style="margin-bottom: 8px;"><strong>Documentação profissional</strong> completa</li>
+          <li style="margin-bottom: 8px;"><strong>Guia de produção</strong> detalhado</li>
+          <li style="margin-bottom: 8px;"><strong>Licença de uso comercial</strong></li>
+        </ul>
+      </div>
+
+      <!-- Como acessar -->
+      <div style="background-color: #eff6ff; padding: 24px; border-radius: 12px; margin: 32px 0; border-left: 4px solid #2563eb;">
+        <h2 style="color: #2563eb; font-size: 18px; margin: 0 0 16px 0;">🎯 Como acessar o repositório:</h2>
+        <ol style="margin: 0; padding-left: 20px; line-height: 2.2;">
+          <li style="margin-bottom: 10px;">Acesse: <a href="{{access_url}}" style="color: #2563eb; font-weight: bold; text-decoration: none;">{{access_url}}</a></li>
+          <li style="margin-bottom: 10px;">Digite seu código: <strong style="color: #10b981;">{{codigo}}</strong></li>
+          <li style="margin-bottom: 10px;">Clique em "Acessar Repositório"</li>
+          <li style="margin-bottom: 10px;">Faça login no GitHub (se necessário)</li>
+          <li style="margin-bottom: 10px;">Clique em "Accept invitation" para aceitar o convite</li>
+          <li>Pronto! Você terá acesso completo ao código</li>
+        </ol>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div style="text-align: center; margin: 32px 0;">
+        <a href="{{repo_url}}" 
+           target="_blank"
+           style="display: inline-block; background-color: #24292e; color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; outline: none; font-weight: bold; margin: 8px; font-size: 16px;">
+          🔗 Repositório GitHub
+        </a>
+        <br style="margin: 12px 0;">
+        <a href="{{access_url}}" 
+           target="_blank"
+           style="display: inline-block; background-color: #10b981; color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; outline: none; font-weight: bold; margin: 8px; font-size: 16px;">
+          🔐 Usar Código de Acesso
+        </a>
+        <br style="margin: 12px 0;">
+        <a href="{{landing_url}}" 
+           target="_blank"
+           style="display: inline-block; background-color: #2563eb; color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; outline: none; font-weight: bold; margin: 8px; font-size: 16px;">
+          📄 Página Principal
+        </a>
+      </div>
+
+      <!-- Importante -->
+      <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 20px; border-radius: 8px; margin: 32px 0;">
+        <p style="margin: 0 0 12px 0; color: #92400e; font-weight: bold; font-size: 16px;">⚠️ Importante:</p>
+        <ul style="margin: 0; padding-left: 20px; color: #92400e; line-height: 1.8;">
+          <li>Este código é pessoal e intransferível</li>
+          <li>Guarde este código com segurança</li>
+          <li>O acesso ao repositório é permanente</li>
+          <li>Em caso de dúvidas, entre em contato via WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; background-color: #2563eb; padding: 24px 16px; border-radius: 0 0 32px 32px; color: white;">
+      <p style="margin: 0 0 16px 0; font-size: 16px; font-weight: bold;">Precisa de ajuda?</p>
+      <p style="margin: 0 0 12px 0;">Entre em contato conosco:</p>
+      <p style="margin: 0 0 16px 0;">
+        <strong>
+          <a href="tel:+554591261695" style="text-decoration: none; outline: none; color: #212121; background-color: white; padding: 12px 24px; border-radius: 8px; display: inline-block; margin: 4px;">
+            📱 Telefone: (45) 9 9126-1695
+          </a>
+        </strong>
+      </p>
+      <p style="margin: 8px 0 0 0;">
+        <strong>
+          <a href="https://wa.me/554591261695" 
+             target="_blank"
+             style="text-decoration: none; outline: none; color: white; font-size: 16px; font-weight: bold; background-color: #25D366; padding: 12px 24px; border-radius: 8px; display: inline-block; margin: 4px;">
+            💬 WhatsApp: (45) 9 9126-1695
+          </a>
+        </strong>
+      </p>
+      <p style="margin: 12px 0 0 0; font-size: 12px; opacity: 0.9;">
+        Horário de atendimento: Segunda a Sexta, 9h às 18h
+      </p>
+      <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: 20px; padding-top: 16px;">
+        <p style="margin: 0; font-size: 12px; opacity: 0.9;">
+          Obrigado pela confiança!<br>
+          <strong>OfflineSync Pro</strong> - Motor profissional de sincronização offline-first
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
