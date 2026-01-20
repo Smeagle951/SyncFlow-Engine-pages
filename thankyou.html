@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -166,6 +167,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="success-icon">✅</div>
@@ -195,7 +197,8 @@
                     [Código sendo gerado...]
                 </div>
                 <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-light);">
-                    Use este código na <a href="access.html" style="color: var(--primary-color); font-weight: bold;">página de acesso</a> 
+                    Use este código na <a href="access.html"
+                        style="color: var(--primary-color); font-weight: bold;">página de acesso</a>
                     ou verifique sua caixa de entrada (e spam) nos próximos minutos.
                 </p>
                 <a href="access.html" class="btn" style="margin-top: 1rem; display: inline-block; text-align: center;">
@@ -205,11 +208,12 @@
         </div>
 
         <div class="note">
-            <strong>⚠️ Importante:</strong> Se você não receber o email em 5 minutos, verifique sua caixa de spam ou entre em contato conosco pelo WhatsApp.
+            <strong>⚠️ Importante:</strong> Se você não receber o email em 5 minutos, verifique sua caixa de spam ou
+            entre em contato conosco pelo WhatsApp.
         </div>
 
-        <a href="https://wa.me/qr/UEWGZ6DMMBBXN1" class="btn" target="_blank">
-            Falar no WhatsApp
+        <a href="https://wa.me/554591261695" class="btn" target="_blank">
+            Falar no WhatsApp: (45) 9 9126-1695
         </a>
 
         <p style="margin-top: 2rem; color: var(--text-light); font-size: 0.9rem;">
@@ -271,17 +275,17 @@
         }
 
         // Inicializar página
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             const checkoutData = loadCheckoutData();
-            
+
             if (checkoutData && checkoutData.email) {
                 // Mostrar email do usuário
                 document.getElementById('userEmail').textContent = checkoutData.email;
-                
+
                 // Simular processamento (2 segundos)
                 setTimeout(() => {
                     const codigo = generateAccessCode();
-                    
+
                     // Salvar dados da compra
                     savePurchaseData(
                         checkoutData.email,
@@ -310,4 +314,5 @@
         // localStorage.removeItem('checkoutData');
     </script>
 </body>
+
 </html>

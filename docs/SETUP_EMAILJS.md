@@ -171,28 +171,103 @@ Este guia mostra como configurar o EmailJS para enviar emails automaticamente co
 1. Vá em **Account** → **General**
 2. Copie a **Public Key** (ex: `abc123xyz`)
 
-### 5. Atualizar checkout.html
+### 5. Atualizar checkout.html ⚠️ IMPORTANTE
 
-Abra `checkout.html` e encontre:
+Agora você precisa atualizar o arquivo `checkout.html` com suas configurações do EmailJS.
 
+#### Passo 1: Ativar EmailJS
+
+1. Abra o arquivo `checkout.html` no seu editor
+2. Procure pela linha **12** (aproximadamente):
+   ```javascript
+   // emailjs.init('YOUR_PUBLIC_KEY');
+   ```
+3. **Descomente e substitua** por:
+   ```javascript
+   emailjs.init('SUA_PUBLIC_KEY_AQUI');
+   ```
+   **Exemplo:** Se sua Public Key for `abc123xyz`, fica:
+   ```javascript
+   emailjs.init('abc123xyz');
+   ```
+
+#### Passo 2: Configurar Service ID e Template ID
+
+1. No mesmo arquivo `checkout.html`, procure pela linha **365-366**:
+   ```javascript
+   const serviceID = 'YOUR_SERVICE_ID'; // Ex: 'service_gmail'
+   const templateID = 'YOUR_TEMPLATE_ID'; // Ex: 'template_access_code'
+   ```
+
+2. **Substitua pelos seus valores:**
+   ```javascript
+   const serviceID = 'SEU_SERVICE_ID_REAL'; // Ex: 'service_gmail'
+   const templateID = 'SEU_TEMPLATE_ID_REAL'; // Ex: 'template_abc123xyz'
+   ```
+
+   **Exemplo:**
+   ```javascript
+   const serviceID = 'service_gmail';
+   const templateID = 'template_abc123xyz';
+   ```
+
+#### 📍 Onde encontrar no código:
+
+**Edição 1 - Linha ~12:**
 ```javascript
-// Linha ~10
-emailjs.init('YOUR_PUBLIC_KEY');
+// ANTES (comentado):
+// emailjs.init('YOUR_PUBLIC_KEY');
+
+// DEPOIS (descomentado e com sua chave):
+emailjs.init('abc123xyz'); // Sua Public Key aqui
 ```
 
-**Substitua `YOUR_PUBLIC_KEY` pela sua Public Key**
-
-E encontre:
-
+**Edição 2 - Linhas ~365-366:**
 ```javascript
-// Linha ~355 (função sendEmailWithCode)
+// ANTES:
 const serviceID = 'YOUR_SERVICE_ID';
 const templateID = 'YOUR_TEMPLATE_ID';
+
+// DEPOIS:
+const serviceID = 'service_gmail'; // Seu Service ID
+const templateID = 'template_abc123xyz'; // Seu Template ID
 ```
 
-**Substitua:**
-- `YOUR_SERVICE_ID` pelo Service ID (ex: `service_gmail`)
-- `YOUR_TEMPLATE_ID` pelo Template ID (ex: `template_access_code`)
+#### ✅ Checklist de Verificação
+
+Depois de editar, verifique se:
+
+- [ ] Linha ~12: `emailjs.init('SUA_PUBLIC_KEY');` está descomentada e tem sua Public Key
+- [ ] Linha ~365: `serviceID` tem seu Service ID (ex: `'service_gmail'`)
+- [ ] Linha ~366: `templateID` tem seu Template ID (ex: `'template_abc123xyz'`)
+- [ ] Todas as aspas estão corretas (simples `'...'` ou duplas `"..."`)
+
+#### 📝 Exemplo Completo do Código Atualizado
+
+**Linha ~12:**
+```javascript
+emailjs.init('abc123xyz'); // Sua Public Key do EmailJS
+```
+
+**Linhas ~365-366:**
+```javascript
+const serviceID = 'service_gmail'; // Seu Service ID
+const templateID = 'template_abc123xyz'; // Seu Template ID
+```
+
+**Linhas ~373-382 (já estão corretas, não precisa mudar):**
+```javascript
+const templateParams = {
+    to_name: nome,
+    to_email: email,
+    codigo: codigo,
+    repo_url: repoUrl,
+    access_url: accessUrl,
+    landing_url: landingPageUrl,
+    telefone: '(45) 9 9126-1695',
+    telefone_link: '554591261695'
+};
+```
 
 ### 6. Testar
 
